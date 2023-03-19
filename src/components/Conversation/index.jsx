@@ -20,7 +20,7 @@ const Conversation = () => {
       {/* Header */}
       <Header />
       <div className="w-full flex-grow overflow-y-scroll h-[100%]">
-        <Message />
+        <Message menu="true" />
       </div>
       {/* Footer */}
       <Footer />

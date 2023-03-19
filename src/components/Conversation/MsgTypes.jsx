@@ -4,7 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Message_options } from "../../data";
 
-const DocMsg = ({ el }) => {
+const DocMsg = ({ el,menu }) => {
   return (
     <div className={el.incoming ? "flex justify-start" : "flex justify-end"}>
       <div
@@ -27,12 +27,12 @@ const DocMsg = ({ el }) => {
           </p>
         </div>
       </div>
-      <MessageOptions />
+      {menu && <MessageOptions />}
     </div>
   );
 };
 
-const LinkMsg = ({ el }) => {
+const LinkMsg = ({ el,menu }) => {
   return (
     <div className={el.incoming ? "flex justify-start" : "flex justify-end"}>
       <div
@@ -64,12 +64,12 @@ const LinkMsg = ({ el }) => {
           </div>
         </div>
       </div>
-      <MessageOptions />
+      {menu && <MessageOptions />}
     </div>
   );
 };
 
-const ReplyMsg = ({ el }) => {
+const ReplyMsg = ({ el,menu }) => {
   return (
     <div className={el.incoming ? "flex justify-start" : "flex justify-end"}>
       <div
@@ -88,12 +88,12 @@ const ReplyMsg = ({ el }) => {
           </p>
         </div>
       </div>
-      <MessageOptions />
+      {menu && <MessageOptions />}
     </div>
   );
 };
 
-const MediaMsg = ({ el }) => {
+const MediaMsg = ({ el,menu }) => {
   return (
     <div className={el.incoming ? "flex justify-start" : "flex justify-end"}>
       <div
@@ -114,12 +114,12 @@ const MediaMsg = ({ el }) => {
           </p>
         </div>
       </div>
-      <MessageOptions />
+      {menu && <MessageOptions />}
     </div>
   );
 };
 
-const TextMsg = ({ el }) => {
+const TextMsg = ({ el,menu }) => {
   return (
     <div className={el.incoming ? "flex justify-start" : "flex justify-end"}>
       <div
@@ -134,7 +134,7 @@ const TextMsg = ({ el }) => {
         </p>
       </div>
       {/* dot thre  */}
-      <MessageOptions />
+      {menu && <MessageOptions />}
     </div>
   );
 };

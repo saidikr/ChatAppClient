@@ -17,7 +17,7 @@ const slice = createSlice({
       state.sidebar.open = !state.sidebar.open;
     },
     updateSidebarType(state, action) {
-      state.sidebar.type = action.payload.type;
+      state.sidebar.type = action.payload;
     },
   },
 });
@@ -36,6 +36,6 @@ export function ToggleSidebar() {
 
 export function UpdateSidebarType(type) {
   return async () => {
-    dispatch(slice.actions.UpdateSidebarType(type));
+    dispatch(slice.actions.updateSidebarType(type));
   };
 }

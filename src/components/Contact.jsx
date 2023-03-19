@@ -1,11 +1,90 @@
 import { faker } from "@faker-js/faker";
-import { Avatar, Box, Button, Divider, IconButton } from "@mui/material";
-import { Bell, CaretRight, Phone, Prohibit, Star, Trash, VideoCamera, X } from "phosphor-react";
-import React from "react";
-import { ToggleSidebar } from "../redux/slices/app";
+import {
+  Avatar,
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Divider,
+  IconButton,
+  Slide,
+} from "@mui/material";
+import {
+  Bell,
+  CaretRight,
+  Phone,
+  Prohibit,
+  Star,
+  Trash,
+  VideoCamera,
+  X,
+} from "phosphor-react";
+import React, { useState } from "react";
+import { ToggleSidebar, UpdateSidebarType } from "../redux/slices/app";
 import { dispatch } from "../redux/store";
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+const DeleteDialog = ({ open, handleClose }) => {
+  return (
+    <Dialog
+      open={open}
+      TransitionComponent={Transition}
+      keepMounted
+      onClose={handleClose}
+      aria-describedby="alert-dialog-slide-description"
+    >
+      <DialogTitle>Delete this chat</DialogTitle>
+      <DialogContent>
+        <DialogContentText id="alert-dialog-slide-description">
+          Are you sure you want to delete this Chat ?
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose}>Cancel</Button>
+        <Button onClick={handleClose}>Yes</Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
+
+const BlockDialog = ({open, handleClose}) => {
+  return (
+    <Dialog
+      open={open}
+      TransitionComponent={Transition}
+      keepMounted
+      onClose={handleClose}
+      aria-describedby="alert-dialog-slide-description"
+    >
+      <DialogTitle>Block this contact</DialogTitle>
+      <DialogContent>
+        <DialogContentText id="alert-dialog-slide-description">
+          Are you sure you want to block this Contact ?
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose}>Cancel</Button>
+        <Button onClick={handleClose}>Yes</Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
+
 const Contact = () => {
+  const [openBlock, setOpenBlock] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
+const handleCloseBlock=()=>{
+  setOpenBlock(false);
+}
+const handleCloseDelete = () => {
+  setOpenDelete(false);
+};
   return (
     <div className="w-[320px] max-h-[100vh] ">
       <div className="flex flex-col h-full">
@@ -57,7 +136,14 @@ const Contact = () => {
           <Divider />
           <div className="flex items-center justify-between">
             <p>Media, Links & Docs</p>
-            <Button endIcon={<CaretRight />}>401</Button>
+            <Button
+              onClick={() => {
+                dispatch(UpdateSidebarType("SHARED"));
+              }}
+              endIcon={<CaretRight />}
+            >
+              401
+            </Button>
           </div>
           <div className="flex space-x-3 items-center">
             {[1, 2, 3].map((el) => (
@@ -72,7 +158,11 @@ const Contact = () => {
               <Star size={25} />
               <p>Starred Messages</p>
             </div>
-            <IconButton>
+            <IconButton
+              onClick={() => {
+                dispatch(UpdateSidebarType("STARRED"));
+              }}
+            >
               <CaretRight />
             </IconButton>
           </div>
@@ -99,15 +189,35 @@ const Contact = () => {
             </div>
           </div>
           <div className="flex items-center space-x-3">
-            <Button startIcon={<Prohibit />} fullWidth variant="outlined">
+            <Button
+              onClick={() => {
+                setOpenBlock(true);
+              }}
+              startIcon={<Prohibit />}
+              fullWidth
+              variant="outlined"
+            >
               Block
             </Button>
-            <Button startIcon={<Trash />} fullWidth variant="outlined">
+            <Button
+              onClick={() => {
+                setOpenDelete(true);
+              }}
+              startIcon={<Trash />}
+              fullWidth
+              variant="outlined"
+            >
               Delete
             </Button>
           </div>
         </div>
       </div>
+      {openBlock && (
+        <BlockDialog open={openBlock} handleClose={handleCloseBlock} />
+      )}
+      {openDelete && (
+        <DeleteDialog open={openDelete} handleClose={handleCloseDelete} />
+      )}
     </div>
   );
 };

@@ -12,9 +12,9 @@ const store = configureStore({
 });
 
 
+
 const persistor = persistStore(store);
 const {dispatch}=store;
-
 const useSelector = useAppSelector;
 const useDispatch = () => useAppDispatch();
 

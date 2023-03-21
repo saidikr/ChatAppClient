@@ -6,16 +6,15 @@ import { useSelector } from "../../redux/store";
 import SharedMessages from "../../components/SharedMessages";
 import StarredMessages from "../../components/StarredMessages";
 
-const GeneralApp = () => {
+const GeneralApp = ({ darkMode, setDarkMode }) => {
   const { sidebar } = useSelector((store) => store.app);
-  console.log(sidebar);
   return (
-    <div className="flex h-[100vh] w-full">
+    <div className={darkMode ? "dark flex h-[100vh] w-full" : "flex h-[100vh] w-full"}>
       <Chats />
       <div
         className={
           sidebar.open
-            ? "w-[calc(100vw-740px)] bg-[#F0F4FA]"
+            ? "w-[calc(100vw-740px)] bg-[#F0F4FA] dark:bg-black"
             : "w-[calc(100vw-420px)] bg-[#F0F4FA]"
         }
       >

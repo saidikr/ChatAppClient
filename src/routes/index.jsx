@@ -1,7 +1,8 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useState } from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 import DashboardLayout from "../layouts/dashboard";
-import LoadingScreen from "../components/LoadingScreen";
+import LoadingScreen from "../components/Loader/LoadingScreen";
+import AuthLayout from "../layouts/main";
 
 const Loadable = (Component) => (props) => {
   return (
@@ -11,8 +12,16 @@ const Loadable = (Component) => (props) => {
   );
 };
 
-export default function Router({ darkMode, setDarkMode }) {
+export default function Router() {
+  const [darkMode, setDarkMode] = useState(false);
   return useRoutes([
+    {
+      path:"/auth",
+      element:<AuthLayout/>,
+      children:[
+        {element:<LoginPage/>,path:"login"}
+      ]
+    },
     {
       path: "/",
       element: <DashboardLayout />,
@@ -23,10 +32,8 @@ export default function Router({ darkMode, setDarkMode }) {
           element: <GeneralApp darkMode={darkMode} setDarkMode={setDarkMode} />,
         },
         {
-          path: "conversation",
-          element: (
-            <Conversation darkMode={darkMode} setDarkMode={setDarkMode} />
-          ),
+          path: "setting",
+          element: <Setting darkMode={darkMode} setDarkMode={setDarkMode} />,
         },
         {
           path: "chats",
@@ -46,6 +53,7 @@ export default function Router({ darkMode, setDarkMode }) {
 const GeneralApp = Loadable(
   lazy(() => import("../pages/dashboard/GeneralApp"))
 );
-const Conversation = Loadable(lazy(() => import("../components/Conversation")));
+const LoginPage = Loadable(lazy(() => import("../pages/auth/Login")));
+const Setting = Loadable(lazy(() => import("../pages/dashboard/Settings")));
 const Chats = Loadable(lazy(() => import("../pages/dashboard/Chats")));
 const Page404 = Loadable(lazy(() => import("../pages/Page404")));

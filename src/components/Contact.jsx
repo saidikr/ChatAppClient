@@ -1,7 +1,6 @@
 import { faker } from "@faker-js/faker";
 import {
   Avatar,
-  Box,
   Button,
   Dialog,
   DialogActions,

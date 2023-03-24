@@ -6,10 +6,11 @@ import PropTypes from "prop-types";
 import { useFormContext, Controller } from "react-hook-form";
 
 
-RHFTextField.PropTypes={
-    name: PropTypes.string,
-    helperText:PropTypes.node,
-}
+RHFTextField.PropTypes = {
+  name: PropTypes.string,
+  label: PropTypes.string,
+  helperText: PropTypes.node,
+};
 
 export default function RHFTextField({ name, helperText, ...other }) {
   const { control } = useFormContext();

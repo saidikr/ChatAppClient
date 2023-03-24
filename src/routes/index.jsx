@@ -39,6 +39,14 @@ export default function Router() {
           element: <Setting darkMode={darkMode} setDarkMode={setDarkMode} />,
         },
         {
+          path: "group",
+          element: <GroupPage darkMode={darkMode} setDarkMode={setDarkMode} />,
+        },
+        {
+          path: "call",
+          element: <CallPage darkMode={darkMode} setDarkMode={setDarkMode} />,
+        },
+        {
           path: "chats",
           element: <Chats darkMode={darkMode} setDarkMode={setDarkMode} />,
         },
@@ -58,8 +66,14 @@ const GeneralApp = Loadable(
 );
 const LoginPage = Loadable(lazy(() => import("../pages/auth/Login")));
 const RegisterPage = Loadable(lazy(() => import("../pages/auth/Register")));
-const ResetPasswordPage = Loadable(lazy(() => import("../pages/auth/ResetPassword")));
-const NewPasswordPage = Loadable(lazy(() => import("../pages/auth/NewPassword")));
+const ResetPasswordPage = Loadable(
+  lazy(() => import("../pages/auth/ResetPassword"))
+);
+const NewPasswordPage = Loadable(
+  lazy(() => import("../pages/auth/NewPassword"))
+);
 const Setting = Loadable(lazy(() => import("../pages/dashboard/Settings")));
+const CallPage = Loadable(lazy(() => import("../pages/dashboard/Call")));
 const Chats = Loadable(lazy(() => import("../pages/dashboard/Chats")));
+const GroupPage = Loadable(lazy(() => import("../pages/dashboard/Group")));
 const Page404 = Loadable(lazy(() => import("../pages/Page404")));

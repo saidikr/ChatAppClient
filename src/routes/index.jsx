@@ -47,6 +47,10 @@ export default function Router() {
           element: <CallPage darkMode={darkMode} setDarkMode={setDarkMode} />,
         },
         {
+          path: "profile",
+          element: <ProfilePage darkMode={darkMode} setDarkMode={setDarkMode} />,
+        },
+        {
           path: "chats",
           element: <Chats darkMode={darkMode} setDarkMode={setDarkMode} />,
         },
@@ -77,3 +81,4 @@ const CallPage = Loadable(lazy(() => import("../pages/dashboard/Call")));
 const Chats = Loadable(lazy(() => import("../pages/dashboard/Chats")));
 const GroupPage = Loadable(lazy(() => import("../pages/dashboard/Group")));
 const Page404 = Loadable(lazy(() => import("../pages/Page404")));
+const ProfilePage = Loadable(lazy(() => import("../pages/dashboard/Profile")));

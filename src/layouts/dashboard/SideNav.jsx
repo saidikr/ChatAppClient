@@ -1,14 +1,32 @@
 import { Divider, IconButton } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/Images/logo.ico";
 import { Nav_Buttons, Nav_Setting } from "../../data";
 import ProfileMenu from "./ProfileMenu";
 
 export const SideNav = ({ darkMode, setDarkMode }) => {
+  const navigate = useNavigate();
+  const getPath = (index) => {
+    switch (index) {
+      case 0:
+        return "/app";
+      case 1:
+        return "/group";
+      case 2:
+        return "/call";
+      case 3:
+        return "/setting";
+
+      default:
+        break;
+    }
+  };
   const [selectedTab, setSelectedTab] = React.useState(0);
 
   const handleChangeTab = (index) => {
     setSelectedTab(index);
+    navigate(getPath(index))
   };
 
   return (

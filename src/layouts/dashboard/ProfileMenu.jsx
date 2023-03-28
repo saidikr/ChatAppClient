@@ -4,10 +4,25 @@ import { Avatar, Fade, Menu } from "@mui/material";
 import { faker } from "@faker-js/faker";
 
 import { Profile_Menu } from "../../data";
+import { useNavigate } from "react-router-dom";
 
 const ProfileMenu = () => {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openMenu = Boolean(anchorEl);
+  const getMenuPath = (index) => {
+    switch (index) {
+      case 0:
+        return "/profile";
+      case 1:
+        return "/setting";
+      case 2:
+        // TODO => Update token & set isAuthenticated to false
+        return "/auth/login";
+      default:
+        break;
+    }
+  };
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -47,12 +62,19 @@ const ProfileMenu = () => {
       >
         <div className="m-4">
           <div className="flex flex-col space-y-2">
-            {Profile_Menu.map((el) => (
+            {Profile_Menu.map((el,idx) => (
               <div
                 className="flex justify-center hover:bg-secondary-lighter hover:rounded-lg p-1"
-                onClick={handleClose}
+                onClick={() => {
+                  handleClick();
+                }}
               >
-                <div className="w-[100px] flex justify-between items-center px-2">
+                <div
+                  onClick={() => {
+                    navigate(getMenuPath(idx));
+                  }}
+                  className="w-[100px] flex justify-between items-center px-2 hover:cursor-pointer "
+                >
                   <span>{el.title}</span>
                   {el.icon}
                 </div>
